@@ -1,9 +1,28 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
-import { Navbar, Nav, NavDropdown, Container } from "react-bootstrap";
+import { Navbar, Nav, NavDropdown, Container, Form, Button, FormControl } from "react-bootstrap";
 import AuthContext from "../../configs/authContext";
+import services from "../../services";
 export default class NavbarComponent extends React.Component {
   static contextType = AuthContext;
+
+  constructor(props) {
+    super(props);
+    this.state = {
+      obras: [],
+    };
+  }
+
+  componentDidMount() {
+    this.getList();
+  }
+
+  getList(/*searchText*/) {
+    services.obra
+      .getObras(/*searchText*/)
+      .then((value) => this.setState({ obras: value }))
+      .catch((err) => this.setState({ error: err }));
+  }
 
   render() {
     const { user, logout } = this.context;
@@ -25,6 +44,10 @@ export default class NavbarComponent extends React.Component {
                   </Nav.Link>
                 </>
               )}
+              <Form inline>
+                <FormControl type="text" placeholder="Search" className="mr-sm-2" />
+                <Button variant="outline-success">Search</Button>
+              </Form>
             </Nav>
             <Nav>
               {user ? (
@@ -32,10 +55,10 @@ export default class NavbarComponent extends React.Component {
                   <NavDropdown.Item onClick={() => logout()}>Logout</NavDropdown.Item>
                 </NavDropdown>
               ) : (
-                <Nav.Link as={NavLink} to="/login">
-                  Login
-                </Nav.Link>
-              )}
+                  <Nav.Link as={NavLink} to="/login">
+                    Login
+                  </Nav.Link>
+                )}
             </Nav>
           </Navbar.Collapse>
         </Container>

@@ -102,7 +102,7 @@ export default class ObraListPage extends React.Component {
                                         {
                                             this.verifyIsInTheList(obra) ?
                                                 ( //se estiver na lista, aparece a opção de remover
-                                                    
+
                                                     <Button variant="outline-danger" onClick={() => this.removeFromMyList(obra._id)}>
                                                         <FontAwesomeIcon icon={faStar} />
                                                     </Button>

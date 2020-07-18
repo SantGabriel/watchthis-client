@@ -65,7 +65,7 @@ export default class LoginPage extends React.Component {
             </Card.Body>
           </Form>
         </Card>
-        <div>
+        <div style={{paddingTop:"10px"}}>
         {this.state.errorMsg !== "" ? (
                 <Alert variant="danger">{this.state.errorMsg}</Alert>
               ) : null}

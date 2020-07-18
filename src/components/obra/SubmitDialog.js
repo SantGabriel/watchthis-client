@@ -1,10 +1,12 @@
 import React from 'react';
 import { Modal, Button, Form } from 'react-bootstrap';
+import Select from 'react-select';
 import service from '../../services';
 
 export default class SubmitDialogObraComponent extends React.Component {
 
   static toEdit = false;
+  static categorias = [];
 
   constructor(props) {
     super(props);
@@ -24,12 +26,11 @@ export default class SubmitDialogObraComponent extends React.Component {
       }
   }
 
-
   handleSubmit(evt) {
     evt.preventDefault();
     if (this.toEdit) {
       service.obra
-        .update(this.props.obra._id, this.state)
+        .updateObra(this.props.obra._id, this.state)
         .then(() => this.props.submited(this.state));
     } else {
       service.obra
@@ -37,6 +38,13 @@ export default class SubmitDialogObraComponent extends React.Component {
         .then(obraId => this.props.submited({ ...this.state, _id: obraId }));
     }
   }
+
+  /*listCategorias() {
+    service.categoria.getCategorias()
+      .then((value) => this.categorias = value)
+      .catch((err) => this.setState({ error: err }));
+      console.log(this.categorias);
+  }*/
 
   handleCancel() {
     this.setState({
@@ -57,7 +65,7 @@ export default class SubmitDialogObraComponent extends React.Component {
 
   render() {
     const { show } = this.props;
-
+    this.listCategorias();
     return (
       <Modal show={show} onHide={this.handleCancel}>
         <Modal.Header>
@@ -73,13 +81,21 @@ export default class SubmitDialogObraComponent extends React.Component {
               />
             </Form.Group>
 
-            <Form.Group>
+            <Form.Group controlId="exampleForm.ControlSelect1">
               <Form.Label>Tipo</Form.Label>
-              <Form.Control
-                value={this.state.tipo}
-                onChange={evt => this.setState({ tipo: evt.target.value })}
-              />
+              <Form.Control as="select" value={this.state.tipo}>
+                <option value="anime">anime</option>
+                <option value="filme">filme</option>
+                <option value="serie">serie</option>
+              </Form.Control>
             </Form.Group>
+
+            /*<Form.Group controlId="exampleForm.ControlSelect2">
+              <Form.Label>Categorias</Form.Label>
+              <Form.Control as="select" multiple value={this.state.categorias}>
+                <Select options={this.categorias} />
+              </Form.Control>
+            </Form.Group>*/
 
             <Form.Group>
               <Form.Label>Data de Inicio</Form.Label>

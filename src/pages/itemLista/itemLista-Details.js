@@ -46,7 +46,17 @@ export default class ItemListaDetailsPage extends React.Component {
                 {itemLista !== undefined
                     ? <div>
                         <Jumbotron>
-                            <h1>{itemLista.obra.nome}</h1>
+                        <div className="row col-sm-12">
+                                <div className="col-sm-6">
+                                <h1>{itemLista.obra.nome}
+                                        </h1>
+                                        </div>
+                                    <div className="col-sm-6" style={{ paddingLeft:"200px"}}>
+                                    <img style={{ height: "274px", width: "200px", border: "1px solid white", }} className="card-img-top" alt={itemLista.obra.nome} src={itemLista.obra.url} />
+                                    </div>
+                                
+                                
+                            </div>
                             <h3>Sua avaliação: {itemLista.nota > 0 ? itemLista.nota : "none"}</h3>
                             <h3>Situação da obra: {itemLista.statusItem}</h3>
                             <Row>

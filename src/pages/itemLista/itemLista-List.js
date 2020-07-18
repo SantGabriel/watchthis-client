@@ -4,6 +4,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faInfo, faStar } from "@fortawesome/free-solid-svg-icons";
 import services from "../../services";
 import "./itemLista.css";
+import SearchFormComponent from "../../components/obra/SearchForm";
 
 export default class ObraListPage extends React.Component {
     constructor(props) {
@@ -17,20 +18,22 @@ export default class ObraListPage extends React.Component {
     }
 
     componentDidMount() {
-        this.getList();
+        this.getMyList();
     }
 
-    getList(/*searchText*/) {
-        services.user
-            .getItensListas(/*searchText*/)
-            .then((value) => this.setState({ itensLista: value, myList: true }))
-            .catch((err) => this.setState({ error: err }));
-    }
+   //Obtem minha lista de obras
+   getMyList(searchText) {
+    searchText = searchText ? searchText : {};
+    services.user
+        .getItensListas(searchText)
+        .then((value) => this.setState({ itensLista: value, myList: true }))
+        .catch((err) => this.setState({ error: err }));
+}
 
     removeFromMyList(obraId) {
         services.user
             .removeItemLista(obraId)
-            .then(() => this.getList())
+            .then(() => this.getMyList())
             .catch((err) => this.setState({ error: err }));
     }
 
@@ -40,6 +43,7 @@ export default class ObraListPage extends React.Component {
         return (
             <Container>
                 {error !== undefined && <Alert variant="danger">{error}</Alert>}
+                <SearchFormComponent search={(text) => this.getMyList(text)} />
                 <Table responsive>
                     <thead>
                         <tr>

@@ -17,9 +17,9 @@ export default class NavbarComponent extends React.Component {
     this.getList();
   }
 
-  getList(/*searchText*/) {
+  getList(searchText) {
     services.obra
-      .getObras(/*searchText*/)
+      .getObras(searchText)
       .then((value) => this.setState({ obras: value }))
       .catch((err) => this.setState({ error: err }));
   }

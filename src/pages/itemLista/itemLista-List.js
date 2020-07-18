@@ -44,6 +44,7 @@ export default class ObraListPage extends React.Component {
                     <thead>
                         <tr>
                             <th>Nome</th>
+                            <th>Imagem</th>
                             <th>Tipo</th>
                             <th>Nota</th>
                             <th>StatusItem</th>
@@ -55,6 +56,9 @@ export default class ObraListPage extends React.Component {
                             itensLista.map((itemLista, index) => (
                                 <tr key={`itemLista${index}`}>
                                     <td>{itemLista.obra.nome}</td>
+                                    <td>
+                                    <img style={{ height: "100px", width: "75px", border:"1px solid white" }} src={itemLista.obra.url} />
+                                    </td>
                                     <td>{itemLista.obra.tipo}</td>
                                     <td>{itemLista.nota}</td>
                                     <td>{itemLista.statusItem}</td>

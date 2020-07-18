@@ -1,6 +1,6 @@
 import React from "react";
 import services from "../../services";
-import { Form, Button, Card } from "react-bootstrap";
+import { Form, Button, Card, Alert } from "react-bootstrap";
 import AuthContext from "../../configs/authContext";
 import "./Auth.css";
 
@@ -9,7 +9,13 @@ export default class LoginPage extends React.Component {
 
   constructor(props) {
     super(props);
-    this.state = { username: "admin", password: "123qweASD" };
+    this.state = {
+      username: "admin",
+      password: "123qweASD",
+      errorMsg: "", // Mensagem de erro para usar em alerts
+     
+    };
+
   }
 
   handleSubmit(evt) {
@@ -20,7 +26,11 @@ export default class LoginPage extends React.Component {
         this.context.login({ username: this.state.username, ...data });
         this.props.history.push("/");
       })
-      .catch((err) => {});
+      .catch((err) => {
+        this.setState({
+          errorMsg: "Ocorreu um erro, verifique os dados novamente."
+        });
+      });
   }
 
   render() {
@@ -55,7 +65,13 @@ export default class LoginPage extends React.Component {
             </Card.Body>
           </Form>
         </Card>
+        <div>
+        {this.state.errorMsg !== "" ? (
+                <Alert variant="danger">{this.state.errorMsg}</Alert>
+              ) : null}
+        </div>
       </div>
+
     );
   }
 }

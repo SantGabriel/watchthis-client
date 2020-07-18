@@ -10,7 +10,7 @@ export default class NavbarComponent extends React.Component {
     super(props);
     this.state = {
       obras: [],
-    };
+    }
   }
 
   componentDidMount() {
@@ -26,6 +26,7 @@ export default class NavbarComponent extends React.Component {
 
   render() {
     const { user, logout } = this.context;
+
     return (
       <Navbar bg="dark" variant="dark" expand="lg">
         <Container>
@@ -44,10 +45,6 @@ export default class NavbarComponent extends React.Component {
                   </Nav.Link>
                 </>
               )}
-              <Form inline>
-                <FormControl type="text" placeholder="Search" className="mr-sm-2" />
-                <Button variant="outline-success">Search</Button>
-              </Form>
             </Nav>
             <Nav>
               {user ? (

@@ -9,6 +9,7 @@ import AuthContext from "../../configs/authContext";
 import "./obra.css";
 
 export default class ObraListPage extends React.Component {
+    
     static contextType = AuthContext; //contexto do utilizador
 
     constructor(props) {

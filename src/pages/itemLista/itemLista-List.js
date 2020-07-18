@@ -1,7 +1,5 @@
 import React from "react";
 import { Container, Button, Table, Alert } from "react-bootstrap";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faInfo, faStar } from "@fortawesome/free-solid-svg-icons";
 import services from "../../services";
 import "./itemLista.css";
 import SearchFormComponent from "../../components/obra/SearchForm";
@@ -21,13 +19,14 @@ export default class ObraListPage extends React.Component {
         this.getMyList("");
     }
 
-   //Obtem minha lista de obras
-   getMyList(searchText) {
-    services.user
-        .getItensListas(searchText)
-        .then((value) => this.setState({ itensLista: value, myList: true }))
-        .catch((err) => this.setState({ error: err }));
-}
+    //Obtem minha lista de obras
+    getMyList(searchText) {
+        searchText = searchText ? searchText : {};
+        services.user
+            .getItensListas(searchText)
+            .then((value) => this.setState({ itensLista: value, myList: true }))
+            .catch((err) => this.setState({ error: err }));
+    }
 
     removeFromMyList(obraId) {
         services.user
@@ -58,22 +57,21 @@ export default class ObraListPage extends React.Component {
                         {
                             itensLista.map((itemLista, index) => (
                                 <tr key={`itemLista${index}`}>
-                                    <td>{itemLista.obra.nome}</td>
-                                    <td>
-                                    <img style={{ height: "100px", width: "75px", border:"1px solid white" }} src={itemLista.obra.url} />
+                                    <td style={{ cursor: "pointer" }}
+                                        onClick={() => this.props.history.push(`/user/details/${itemLista.obra._id}`)}>
+                                        <img style={{ height: "100px", width: "75px", border: "1px solid white" }} src={itemLista.obra.url} />
                                     </td>
-                                    <td>{itemLista.obra.tipo}</td>
-                                    <td>{itemLista.nota}</td>
-                                    <td>{itemLista.statusItem}</td>
+                                    <td style={{ cursor: "pointer" }}
+                                        onClick={() => this.props.history.push(`/user/details/${itemLista.obra._id}`)} >{itemLista.obra.nome}</td>
+                                    <td style={{ cursor: "pointer" }}
+                                        onClick={() => this.props.history.push(`/user/details/${itemLista.obra._id}`)} >{itemLista.obra.tipo}</td>
+                                    <td style={{ cursor: "pointer" }}
+                                        onClick={() => this.props.history.push(`/user/details/${itemLista.obra._id}`)} >{itemLista.nota}</td>
+                                    <td style={{ cursor: "pointer" }}
+                                        onClick={() => this.props.history.push(`/user/details/${itemLista.obra._id}`)} >{itemLista.statusItem}</td>
                                     <td style={{ textAlign: "right" }}>
-                                        <Button
-                                            variant="outline-primary"
-                                            onClick={() => this.props.history.push(`/user/details/${itemLista.obra._id}`)}>
-                                            <FontAwesomeIcon icon={faInfo} />
-                                        </Button>
-
                                         <Button variant="outline-danger" onClick={() => this.removeFromMyList(itemLista.obra._id)}>
-                                            <FontAwesomeIcon icon={faStar} />
+                                            <span role="img" aria-label="Remover dos favoritos">➖</span>
                                         </Button>
                                     </td>
                                 </tr>

@@ -36,19 +36,19 @@ export default class LoginPage extends React.Component {
   render() {
     const { username, password } = this.state;
     return (
-      <div id="auth-board">
+      <div id="auth-board" style={{paddingTop:"1%"}}>
         <Card style={{ width: "18rem" }}>
           <Form onSubmit={(evt) => this.handleSubmit(evt)}>
             <Card.Body>
-              <Card.Title>Login</Card.Title>
+              <Card.Title>Iniciar Sessão</Card.Title>
 
               <Form.Group>
-                <Form.Label>Username</Form.Label>
+                <Form.Label>Nome Utilizador</Form.Label>
                 <Form.Control value={username} onChange={(evt) => this.setState({ username: evt.target.value })} />
               </Form.Group>
 
               <Form.Group>
-                <Form.Label>Password</Form.Label>
+                <Form.Label>Palavra Passe</Form.Label>
                 <Form.Control
                   type="password"
                   value={password}
@@ -57,10 +57,10 @@ export default class LoginPage extends React.Component {
               </Form.Group>
 
               <Button variant="primary" type="submit" block>
-                Login
+                Entrar
               </Button>
               <Button variant="outline-secondary" size="sm" onClick={() => this.props.history.push("/register")} block>
-                Register
+                Registar
               </Button>
             </Card.Body>
           </Form>

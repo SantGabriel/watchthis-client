@@ -18,6 +18,7 @@ export default class ObraListPage extends React.Component {
             itensLista: [],
             error: undefined,
             toCreate: false,
+            search: "",
         };
     }
 
@@ -59,9 +60,13 @@ export default class ObraListPage extends React.Component {
             .catch((err) => this.setState({ error: err }));
     }
 
+    filtros() {
+
+    }
+
     render() {
         const { user } = this.context;
-        const { obras, error, toCreate } = this.state;
+        const { obras, error, toCreate, search } = this.state;
         if (user) this.getMyList();
         return (
             <Container>
@@ -75,8 +80,8 @@ export default class ObraListPage extends React.Component {
                         <FontAwesomeIcon icon={faPlus} />
                         &nbsp;Adicionar nova obra
                     </Button>
+                    <SearchFormComponent search={(nome) => this.setState({ search: nome })} />
                 </div>
-
 
                 <SubmitDialogComponent
                     show={toCreate}
@@ -87,8 +92,8 @@ export default class ObraListPage extends React.Component {
                 <Table responsive>
                     <thead>
                         <tr>
+                            <th></th>
                             <th>Nome</th>
-                            <th>Imagem</th>
                             <th>Tipo</th>
                             <th>Avaliacao</th>
                             <th />
@@ -96,12 +101,13 @@ export default class ObraListPage extends React.Component {
                     </thead>
                     <tbody>
                         {
-                            obras.map((obra, index) => (
+                            obras.map((obra, index) => obra.nome.toLowerCase().includes(search.toLowerCase()) ? 
+                            (
                                 <tr key={`obra${index}`} >
-                                    <td>{obra.nome}</td>
                                     <td>
                                     <img style={{ height: "100px", width: "75px", border:"1px solid white" }} src={obra.url} />
                                     </td>
+                                    <td>{obra.nome}</td>                                    
                                     <td>{obra.tipo}</td>
                                     <td>{obra.avaliacao.toFixed(1)}</td>
                                     <td style={{ textAlign: "right" }}>
@@ -130,7 +136,10 @@ export default class ObraListPage extends React.Component {
                                         }
                                     </td>
                                 </tr>
-                            ))
+                            )
+                            :
+                            ""
+                            )
                         }
                     </tbody>
                 </Table>

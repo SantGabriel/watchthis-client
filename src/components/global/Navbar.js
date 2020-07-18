@@ -42,8 +42,9 @@ export default class NavbarComponent extends React.Component {
                 <Nav.Link as={NavLink} to="/user/list">
                   Minha Lista
                 </Nav.Link>
-              )}
+              )}              
             </Nav>
+            
             <Nav>
               {user ? (
                 <NavDropdown title={user.username} alignRight>
@@ -55,6 +56,7 @@ export default class NavbarComponent extends React.Component {
                   </Nav.Link>
                 )}
             </Nav>
+            
           </Navbar.Collapse>
         </Container>
       </Navbar>

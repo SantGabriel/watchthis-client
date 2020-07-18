@@ -12,10 +12,8 @@ export default class LoginPage extends React.Component {
     this.state = {
       username: "",
       password: "",
-      errorMsg: "" // Mensagem de erro para usar em alerts
-     
+      errorMsg: "" // Mensagem de erro para usar em alerts     
     };
-
   }
 
   handleSubmit(evt) {

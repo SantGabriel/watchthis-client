@@ -83,7 +83,7 @@ export default class ObraListPage extends React.Component {
                             <SearchFormComponent search={(text) => this.getList(text)} />
                         </Col>
                         <Col xs={6}>
-                            <div className="buttons-container" style={{ marginBottom: "5px", position: "fixed", marginTop: "5px", marginLeft: "40%" }}> {/*Se estiver nos favoritos, não permite adicionar obras*/}
+                            <div className="buttons-container" style={{ marginBottom: "5px", position: "absolute", marginTop: "5px" }}> {/*Se estiver nos favoritos, não permite adicionar obras*/}
                                 {user && user.role === 1 && (
                                     <Button
                                         variant="outline-primary"

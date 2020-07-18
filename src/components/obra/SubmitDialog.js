@@ -90,12 +90,12 @@ export default class SubmitDialogObraComponent extends React.Component {
               </Form.Control>
             </Form.Group>
 
-            /*<Form.Group controlId="exampleForm.ControlSelect2">
+            {/*<Form.Group controlId="exampleForm.ControlSelect2">
               <Form.Label>Categorias</Form.Label>
               <Form.Control as="select" multiple value={this.state.categorias}>
                 <Select options={this.categorias} />
               </Form.Control>
-            </Form.Group>*/
+            </Form.Group> */}
 
             <Form.Group>
               <Form.Label>Data de Inicio</Form.Label>

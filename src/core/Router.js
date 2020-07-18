@@ -20,7 +20,7 @@ export default class RouterComponent extends React.Component {
         <Switch>
           <Route exact path="/register" component={RegisterPage} />
           <Route exact path="/login" component={LoginPage} />
-          <Route exact path="/obra/list" component={ObraListPage} />
+          <Route exact path="/obra/list/:search?" component={ObraListPage} />
           <PrivateRoute roles={[roles.Admin, roles.Utilizador]} exact path="/user/list" component={ItemListaListPage} />
           <Route
             exact

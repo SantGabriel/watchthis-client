@@ -35,7 +35,7 @@ export default class NavbarComponent extends React.Component {
               <Nav.Link as={NavLink} exact to="/">
                 Home
               </Nav.Link>
-              <Nav.Link as={NavLink} exact to="/obra/list">
+              <Nav.Link as={NavLink} exact to="/obra/list/">
                 Obras
                   </Nav.Link>
               {user && (

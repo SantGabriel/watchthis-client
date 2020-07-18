@@ -23,21 +23,22 @@ export default class ObraListPage extends React.Component {
     }
 
     componentDidMount() {
-        this.getList();
+        this.getList({});
     }
 
     //Obtem lista de todas as obras
-    getList(/*searchText*/) {
+    getList(searchText) {
+        searchText = searchText ? searchText : {};
         services.obra
-            .getObras(/*searchText*/)
+            .getObras(searchText)
             .then((value) => this.setState({ obras: value }))
             .catch((err) => this.setState({ error: err }));
     }
 
     //Obtem minha lista de obras
-    getMyList(/*searchText*/) {
+    getMyList(searchText) {
         services.user
-            .getItensListas(/*searchText*/)
+            .getItensListas(searchText)
             .then((value) => this.setState({ itensLista: value, myList: true }))
             .catch((err) => this.setState({ error: err }));
     }
@@ -63,7 +64,7 @@ export default class ObraListPage extends React.Component {
     render() {
         const { user } = this.context;
         const { obras, error, toCreate } = this.state;
-        if (user) this.getMyList();
+        if (user) this.getMyList(); //obtem a lista de favoritos apenas de utilizadores autenticados
         return (
             <Container>
                 {error !== undefined && <Alert variant="danger">{error}</Alert>}
@@ -77,7 +78,7 @@ export default class ObraListPage extends React.Component {
                         &nbsp;Adicionar nova obra
                     </Button>
                 </div>
-
+                <SearchFormComponent search={(text) => this.getList(text)} />
 
                 <SubmitDialogComponent
                     show={toCreate}

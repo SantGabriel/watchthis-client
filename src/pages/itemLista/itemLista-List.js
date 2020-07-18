@@ -12,20 +12,21 @@ export default class ObraListPage extends React.Component {
             itensLista: [],
             error: undefined,
             toCreate: false,
-            myList: false,
+            myList: false
         };
     }
 
     componentDidMount() {
-        this.getList();
+        this.getMyList("");
     }
 
-    getList(/*searchText*/) {
-        services.user
-            .getItensListas(/*searchText*/)
-            .then((value) => this.setState({ itensLista: value, myList: true }))
-            .catch((err) => this.setState({ error: err }));
-    }
+   //Obtem minha lista de obras
+   getMyList(searchText) {
+    services.user
+        .getItensListas(searchText)
+        .then((value) => this.setState({ itensLista: value, myList: true }))
+        .catch((err) => this.setState({ error: err }));
+}
 
     removeFromMyList(obraId) {
         services.user

@@ -13,12 +13,12 @@ export default class ObraListPage extends React.Component {
             itensLista: [],
             error: undefined,
             toCreate: false,
-            myList: false,
+            myList: false
         };
     }
 
     componentDidMount() {
-        this.getMyList();
+        this.getMyList("");
     }
 
    //Obtem minha lista de obras

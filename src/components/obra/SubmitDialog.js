@@ -117,7 +117,7 @@ export default class SubmitDialogObraComponent extends React.Component {
             <Form.Group>
               <Form.Label>URL da Imagem</Form.Label>
               <Form.Control
-                value={this.state.descricao}
+                value={this.state.url}
                 onChange={evt => this.setState({ url: evt.target.value })}
               />
             </Form.Group>

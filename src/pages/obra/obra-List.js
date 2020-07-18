@@ -24,7 +24,7 @@ export default class ObraListPage extends React.Component {
     }
 
     componentDidMount() {
-        this.getList({});
+        this.getList("");
     }
 
     //Obtem lista de todas as obras
@@ -38,7 +38,6 @@ export default class ObraListPage extends React.Component {
 
     //Obtem minha lista de obras
     getMyList(searchText) {
-        searchText = searchText ? searchText : {};
         services.user
             .getItensListas(searchText)
             .then((value) => this.setState({ itensLista: value, myList: true }))

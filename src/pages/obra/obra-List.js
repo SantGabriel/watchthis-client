@@ -1,5 +1,5 @@
 import React from "react";
-import { Container, Button, Table, Alert ,Row , Col} from "react-bootstrap";
+import { Container, Button, Table, Alert, Row, Col } from "react-bootstrap";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPlus } from "@fortawesome/free-solid-svg-icons";
 import services from "../../services";
@@ -79,11 +79,12 @@ export default class ObraListPage extends React.Component {
 
                 <Container>
                     <Row>
+                        <Col xs={3}></Col>
                         <Col xs={6}>
                             <SearchFormComponent search={(text) => this.getList(text)} />
                         </Col>
-                        <Col xs={6}>
-                            <div className="buttons-container" style={{ marginBottom: "5px", position: "fixed", marginTop: "5px", marginLeft: "40%" }}> {/*Se estiver nos favoritos, não permite adicionar obras*/}
+                        <Col xs={3}>
+                            <div className="buttons-container" > {/*Se estiver nos favoritos, não permite adicionar obras*/}
                                 {user && user.role === 1 && (
                                     <Button
                                         variant="outline-primary"

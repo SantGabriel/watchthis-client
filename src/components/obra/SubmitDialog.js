@@ -29,7 +29,7 @@ export default class SubmitDialogObraComponent extends React.Component {
     evt.preventDefault();
     if (this.toEdit) {
       service.obra
-        .update(this.props.obra._id, this.state)
+        .updateObra(this.props.obra._id, this.state)
         .then(() => this.props.submited(this.state));
     } else {
       service.obra
@@ -59,7 +59,7 @@ export default class SubmitDialogObraComponent extends React.Component {
     const { show } = this.props;
 
     return (
-      <Modal show={show} onHide={this.handleCancel}>
+      <Modal show={show}>
         <Modal.Header>
           <Modal.Title>{this.toEdit ? 'Editar Obra' : 'Criar Obra'}</Modal.Title>
         </Modal.Header>

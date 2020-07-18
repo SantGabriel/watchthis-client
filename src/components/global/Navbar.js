@@ -34,19 +34,17 @@ export default class NavbarComponent extends React.Component {
               <Nav.Link as={NavLink} exact to="/">
                 Home
               </Nav.Link>
+              <Nav.Link as={NavLink} exact to="/obra/list">
+                Obras
+                  </Nav.Link>
               {user && (
-                <>
-                  <Nav.Link as={NavLink} to="/obra/list">
-                    Obras
-                  </Nav.Link>
-                  <Nav.Link as={NavLink} to="/user/list">
-                    Minha Lista
-                  </Nav.Link>
-                </>
+                <Nav.Link as={NavLink} to="/user/list">
+                  Minha Lista
+                </Nav.Link>
               )}
               <Form inline>
                 <FormControl type="text" placeholder="Search" className="mr-sm-2" />
-                <Button variant="outline-success">Search</Button>
+                <Button variant="outline-success">Pesquisar</Button>
               </Form>
             </Nav>
             <Nav>

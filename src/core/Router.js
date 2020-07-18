@@ -20,16 +20,15 @@ export default class RouterComponent extends React.Component {
         <Switch>
           <Route exact path="/register" component={RegisterPage} />
           <Route exact path="/login" component={LoginPage} />
-          <PrivateRoute roles={[roles.Boss, roles.Servant]} exact path="/obra/list" component={ObraListPage} />
-          <PrivateRoute roles={[roles.Boss, roles.Servant]} exact path="/user/list" component={ItemListaListPage} />
-          <PrivateRoute
-            roles={[roles.Boss, roles.Servant]}
+          <Route exact path="/obra/list" component={ObraListPage} />
+          <PrivateRoute roles={[roles.Admin, roles.Utilizador]} exact path="/user/list" component={ItemListaListPage} />
+          <Route
             exact
             path="/obra/details/:id"
             component={ObraDetailsPage}
           />
           <PrivateRoute
-            roles={[roles.Boss, roles.Servant]}
+            roles={[roles.Admin, roles.Utilizador]}
             exact
             path="/user/details/:id"
             component={ItemListaDetailsPage}

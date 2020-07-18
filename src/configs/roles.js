@@ -1,4 +1,4 @@
 export default {
-  Boss: 1,
-  Servant: 2,
+  Admin: 1,
+  Utilizador: 2,
 };

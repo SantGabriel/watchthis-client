@@ -5,9 +5,12 @@ import { faInfo, faPlus, faStar } from "@fortawesome/free-solid-svg-icons";
 import services from "../../services";
 import SubmitDialogComponent from "../../components/obra/SubmitDialog";
 import SearchFormComponent from "../../components/obra/SearchForm";
+import AuthContext from "../../configs/authContext";
 import "./obra.css";
 
 export default class ObraListPage extends React.Component {
+    static contextType = AuthContext; //contexto do utilizador
+
     constructor(props) {
         super(props);
         this.state = {
@@ -22,12 +25,16 @@ export default class ObraListPage extends React.Component {
         this.getList();
     }
 
+    //Obtem lista de todas as obras
     getList(/*searchText*/) {
         services.obra
             .getObras(/*searchText*/)
             .then((value) => this.setState({ obras: value }))
             .catch((err) => this.setState({ error: err }));
+    }
 
+    //Obtem minha lista de obras
+    getMyList(/*searchText*/) {
         services.user
             .getItensListas(/*searchText*/)
             .then((value) => this.setState({ itensLista: value, myList: true }))
@@ -53,8 +60,9 @@ export default class ObraListPage extends React.Component {
     }
 
     render() {
+        const { user } = this.context;
         const { obras, error, toCreate } = this.state;
-
+        if (user) this.getMyList();
         return (
             <Container>
                 {error !== undefined && <Alert variant="danger">{error}</Alert>}
@@ -65,9 +73,8 @@ export default class ObraListPage extends React.Component {
                         style={{ alignSelf: "flex-start" }}
                         onClick={() => this.setState({ toCreate: true })}>
                         <FontAwesomeIcon icon={faPlus} />
-                        &nbsp;Add new obra
+                        &nbsp;Adicionar nova obra
                     </Button>
-                    <SearchFormComponent search={(text) => this.getList(text)} />
                 </div>
 
 
@@ -92,7 +99,7 @@ export default class ObraListPage extends React.Component {
                                 <tr key={`obra${index}`} >
                                     <td>{obra.nome}</td>
                                     <td>{obra.tipo}</td>
-                                    <td>{obra.avaliacao}</td>
+                                    <td>{obra.avaliacao.toFixed(1)}</td>
                                     <td style={{ textAlign: "right" }}>
                                         <Button
                                             variant="outline-primary"
@@ -100,19 +107,22 @@ export default class ObraListPage extends React.Component {
                                             <FontAwesomeIcon icon={faInfo} />
                                         </Button>
                                         {
-                                            this.verifyIsInTheList(obra) ?
+                                            user ? //Se não estiver autenticado, não possui a opção de adicionar ao favoritos                                         
+                                            (this.verifyIsInTheList(obra) ?
                                                 ( //se estiver na lista, aparece a opção de remover
-
                                                     <Button variant="outline-danger" onClick={() => this.removeFromMyList(obra._id)}>
                                                         <FontAwesomeIcon icon={faStar} />
                                                     </Button>
                                                 )
                                                 :
-                                                ( //se não estiver na lista, aparece a opção de adicionar 
+                                                ( //se a obra não estiver na lista, aparece a opção de adicionar 
                                                     <Button variant="warning" onClick={() => this.addToMyList(obra._id)}>
                                                         <FontAwesomeIcon icon={faStar} />
                                                     </Button>
                                                 )
+                                            )
+                                            :
+                                            ""
                                         }
                                     </td>
                                 </tr>

@@ -5,8 +5,11 @@ import { faArrowLeft } from '@fortawesome/free-solid-svg-icons';
 import service from '../../services';
 import RemoveDialogComponent from '../../components/obra/RemoveDialog';
 import SubmitDialogComponent from '../../components/obra/SubmitDialog';
+import AuthContext from "../../configs/authContext";
 
 export default class ObraDetailsPage extends React.Component {
+    static contextType = AuthContext; //contexto do utilizador
+
     constructor(props) {
         super(props);
         this.state = {
@@ -25,6 +28,7 @@ export default class ObraDetailsPage extends React.Component {
     }
 
     render() {
+        const { user } = this.context;
         const { obra, error, toRemove, toUpdate } = this.state;
 
         return (
@@ -33,7 +37,7 @@ export default class ObraDetailsPage extends React.Component {
                     variant="outline-primary"
                     style={{ margin: '10px 0' }}
                     onClick={() => this.props.history.goBack()} >
-                    <FontAwesomeIcon icon={faArrowLeft} />&nbsp;Back to list
+                    <FontAwesomeIcon icon={faArrowLeft} />&nbsp;Voltar
                 </Button>
                 {error !== undefined &&
                     <Alert variant="danger">
@@ -68,13 +72,13 @@ export default class ObraDetailsPage extends React.Component {
                                 <Col xs={4} md={3} lg={2}>
                                     <Badge variant="secondary">Avaliacao</Badge>
                                 </Col>
-                                <Col xs={8} md={9} lg={10}>{obra.avaliacao}</Col>
+                                <Col xs={8} md={9} lg={10}>{obra.avaliacao.toFixed(1)}</Col>
                             </Row>
                             <Row>
                                 <Col xs={4} md={3} lg={2}>
                                     <Badge variant="secondary">Duracao</Badge>
                                 </Col>
-                                
+
                                 <Col xs={8} md={9} lg={10}>
                                     {//filme: minutos / serie: temporadas / anime: nº de episódios
                                         obra.duracao +
@@ -106,19 +110,26 @@ export default class ObraDetailsPage extends React.Component {
                                 <Col xs={8} md={9} lg={10}>{obra.descricao}</Col>
                             </Row>
                             <br />
-                            <p>
-                                <Button
-                                    variant="dark"
-                                    onClick={() => this.setState({ toUpdate: true })}>
-                                    Update
+                            {
+                                (user ? //caso não esteja autenticado, os botões não aparecem
+                                    <p>
+                                        <Button
+                                            variant="dark"
+                                            onClick={() => this.setState({ toUpdate: true })}>
+                                            Update
                                 </Button>&nbsp;
                                 <Button
-                                    variant="danger"
-                                    onClick={() => this.setState({ toRemove: true })}>
-                                    Remove
+                                            variant="danger"
+                                            onClick={() => this.setState({ toRemove: true })}>
+                                            Remove
                                 </Button>
-                            </p>
+                                    </p>
+                                    :
+                                    ""
+                                )
+                            }
                         </Jumbotron>
+
 
                         <RemoveDialogComponent
                             obraId={obra._id}
@@ -133,6 +144,7 @@ export default class ObraDetailsPage extends React.Component {
                             submited={updatedObra =>
                                 this.setState({ obra: updatedObra, toUpdate: false })}
                         />
+
                     </div>
                     : <Spinner animation="border" role="status">
                         <span className="sr-only">Loading...</span>

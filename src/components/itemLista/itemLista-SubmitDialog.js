@@ -4,10 +4,12 @@ import services from '../../services';
 
 export default class SubmitDialogItemComponent extends React.Component {
   toEdit = false;
+  modal = false;
 
   constructor(props) {
     super(props);
     this.state = this.props.itemLista;
+    
   }
 
   handleSubmit(evt) {
@@ -27,7 +29,7 @@ export default class SubmitDialogItemComponent extends React.Component {
     const { nota, statusItem } = this.state;
 
     return (
-      <Modal show={show} onHide={this.handleCancel}>
+      <Modal show={show}>
         <Modal.Header>
           <Modal.Title>{this.toEdit ? 'Edit obra' : 'Create obra'}</Modal.Title>
         </Modal.Header>

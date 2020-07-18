@@ -67,7 +67,7 @@ export default class SubmitDialogObraComponent extends React.Component {
     const { show } = this.props;
     this.listCategorias();
     return (
-      <Modal show={show} onHide={this.handleCancel}>
+      <Modal show={show}>
         <Modal.Header>
           <Modal.Title>{this.toEdit ? 'Editar Obra' : 'Criar Obra'}</Modal.Title>
         </Modal.Header>

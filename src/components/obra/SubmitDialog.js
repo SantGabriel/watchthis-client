@@ -12,7 +12,7 @@ export default class SubmitDialogComponent extends React.Component {
       dataInicio: '',
       dataFim: 0,
       categorias: [],
-      avaliacao: -1,
+      avaliacao: 0,
       duracao: 0,
       nVotos: 0,
       nListas: 0,
@@ -29,7 +29,7 @@ export default class SubmitDialogComponent extends React.Component {
         .then(() => this.props.submited(this.state));
     } else {
       service.obra
-        .create(this.state)
+        .addObra(this.state)
         .then(obraId => this.props.submited({ ...this.state, _id: obraId }));
     }
   }
@@ -40,8 +40,9 @@ export default class SubmitDialogComponent extends React.Component {
       tipo: '',
       dataInicio: '',
       dataFim: 0,
+      url: '',
       categorias: [],
-      avaliacao: -1,
+      avaliacao: 0,
       duracao: 0,
       nVotos: 0,
       nListas: 0,
@@ -56,7 +57,7 @@ export default class SubmitDialogComponent extends React.Component {
     return (
       <Modal show={show} onHide={this.handleCancel}>
         <Modal.Header>
-          <Modal.Title>{this.toEdit ? 'Edit obra' : 'Create obra'}</Modal.Title>
+          <Modal.Title>{this.toEdit ? 'Editar Obra' : 'Criar Obra'}</Modal.Title>
         </Modal.Header>
         <Form onSubmit={evt => this.handleSubmit(evt)}>
           <Modal.Body>
@@ -100,6 +101,13 @@ export default class SubmitDialogComponent extends React.Component {
               <Form.Label>Descricao</Form.Label>
               <Form.Control
                 onChange={evt => this.setState({ descricao: evt.target.value })}
+              />
+            </Form.Group>
+
+            <Form.Group>
+              <Form.Label>URL da Imagem</Form.Label>
+              <Form.Control
+                onChange={evt => this.setState({ url: evt.target.value })}
               />
             </Form.Group>
 

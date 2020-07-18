@@ -1,7 +1,7 @@
 import React from "react";
 import { Container, Button, Table, Alert } from "react-bootstrap";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faInfo, faPlus, faStar } from "@fortawesome/free-solid-svg-icons";
+import { faPlus } from "@fortawesome/free-solid-svg-icons";
 import services from "../../services";
 import SubmitDialogComponent from "../../components/obra/SubmitDialog";
 import SearchFormComponent from "../../components/obra/SearchForm";
@@ -19,7 +19,7 @@ export default class ObraListPage extends React.Component {
             itensLista: [],
             error: undefined,
             toCreate: false,
-            role:[]
+            role: []
         };
     }
 
@@ -65,25 +65,12 @@ export default class ObraListPage extends React.Component {
 
     render() {
         const { user } = this.context;
-        const { obras, error, toCreate} = this.state;
-
+        const { obras, error, toCreate } = this.state;
         if (user) this.getMyList(); //obtem a lista de favoritos apenas de utilizadores autenticados
         return (
-            <Container>
+            <Container style={{ display: "grid" }}>
                 {error !== undefined && <Alert variant="danger">{error}</Alert>}
 
-                <div className="buttons-container" style={{ marginTop: "5px" }}> {/*Se estiver nos favoritos, não permite adicionar obras*/}
-                                {user && user.role === 1 && (
-                                    <Button
-                                    variant="outline-primary"
-                                    style={{ alignSelf: "flex-start" }}
-                                    onClick={() => this.setState({ toCreate: true })}>
-                                    
-                                   <FontAwesomeIcon icon={faPlus} />
-                                    &nbsp;Adicionar nova obra
-                                </Button>
-                                  )}                        
-                </div>
                 <SearchFormComponent search={(text) => this.getList(text)} />
 
                 <SubmitDialogComponent
@@ -92,11 +79,27 @@ export default class ObraListPage extends React.Component {
                     submited={(createdObra) => this.setState({ obras: [...obras, createdObra], toCreate: false })}
                 />
 
+
+
+                <div className="buttons-container" style={{ marginBottom: "5px", position: "absolute", marginTop: "5px", marginLeft: "40%" }}> {/*Se estiver nos favoritos, não permite adicionar obras*/}
+                    {user && user.role === 1 && (
+                        <Button
+                            variant="outline-primary"
+                            style={{ alignSelf: "flex-start" }}
+                            onClick={() => this.setState({ toCreate: true })}>
+
+                            <span role="img" aria-label="Adicionar">🖊️ </span>
+                                    &nbsp;Adicionar Obra
+                        </Button>
+                    )}
+                </div>
+
+
                 <Table responsive>
                     <thead>
                         <tr>
-                            <th>Nome</th>
                             <th>Imagem</th>
+                            <th>Nome</th>
                             <th>Tipo</th>
                             <th>Avaliacao</th>
                             <th />
@@ -106,30 +109,35 @@ export default class ObraListPage extends React.Component {
                         {
                             obras.map((obra, index) => (
                                 <tr key={`obra${index}`} >
-                                    <td>{obra.nome}</td>
-                                    <td>
+                                    <td style={{ cursor: "pointer" }} 
+                                    onClick={() => this.props.history.push(`/obra/details/${obra._id}`)}>
                                         <img style={{ height: "100px", width: "75px", border: "1px solid white" }} src={obra.url} />
                                     </td>
-                                    <td>{obra.tipo}</td>
-                                    <td>{obra.avaliacao.toFixed(1)}</td>
+                                    <td style={{ cursor: "pointer" }}
+                                     onClick={() => this.props.history.push(`/obra/details/${obra._id}`)}>
+                                         {obra.nome}</td>
+
+                                    <td style={{ cursor: "pointer" }}
+                                     onClick={() => this.props.history.push(`/obra/details/${obra._id}`)}>
+                                         {obra.tipo}</td>
+
+                                    <td style={{ cursor: "pointer" }}
+                                     onClick={() => this.props.history.push(`/obra/details/${obra._id}`)}>
+                                         {obra.avaliacao.toFixed(1)}</td>
+
                                     <td style={{ textAlign: "right" }}>
-                                        <Button
-                                            variant="outline-primary"
-                                            onClick={() => this.props.history.push(`/obra/details/${obra._id}`)}>
-                                            <FontAwesomeIcon icon={faInfo} />
-                                        </Button>
                                         {
                                             user ? //Se não estiver autenticado, não possui a opção de adicionar ao favoritos                                         
                                                 (this.verifyIsInTheList(obra) ?
                                                     ( //se estiver na lista, aparece a opção de remover
                                                         <Button variant="outline-danger" onClick={() => this.removeFromMyList(obra._id)}>
-                                                            <FontAwesomeIcon icon={faStar} />
+                                                            <span role="img" aria-label="Remover dos favoritos">➖</span>
                                                         </Button>
                                                     )
                                                     :
                                                     ( //se a obra não estiver na lista, aparece a opção de adicionar 
-                                                        <Button variant="warning" onClick={() => this.addToMyList(obra._id)}>
-                                                            <FontAwesomeIcon icon={faStar} />
+                                                        <Button variant="success" onClick={() => this.addToMyList(obra._id)}>
+                                                            <span role="img" aria-label="Adicionar aos favoritos">➕</span>
                                                         </Button>
                                                     )
                                                 )

@@ -33,7 +33,7 @@ export default class NavbarComponent extends React.Component {
           <Navbar.Collapse id="basic-navbar-nav">
             <Nav className="mr-auto">
               <Nav.Link as={NavLink} exact to="/">
-                Home
+                Página Inicial
               </Nav.Link>
               <Nav.Link as={NavLink} exact to="/obra/list/">
                 Obras
@@ -50,11 +50,11 @@ export default class NavbarComponent extends React.Component {
             <Nav>
               {user ? (
                 <NavDropdown title={user.username} alignRight>
-                  <NavDropdown.Item onClick={() => logout()}>Logout</NavDropdown.Item>
+                  <NavDropdown.Item onClick={() => logout()}>Sair</NavDropdown.Item>
                 </NavDropdown>
               ) : (
                   <Nav.Link as={NavLink} to="/login">
-                    Login
+                    Iniciar Sessão
                   </Nav.Link>
                 )}
             </Nav>

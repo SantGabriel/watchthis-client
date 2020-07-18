@@ -18,7 +18,7 @@ export default class SearchFormComponent extends React.Component {
     const { text } = this.state;
 
     return (
-      <Form onSubmit={(evt) => this.handleSubmit(evt)}>
+      <Form style={{width:"70%"}} onSubmit={(evt) => this.handleSubmit(evt)}>
         <Row>
           <Col style={{ paddingTop: "5px" }}>
             <Form.Group>

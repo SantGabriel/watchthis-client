@@ -1,5 +1,5 @@
 import React from "react";
-import { Container, Button, Table, Alert } from "react-bootstrap";
+import { Container, Button, Table, Alert ,Row , Col} from "react-bootstrap";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPlus } from "@fortawesome/free-solid-svg-icons";
 import services from "../../services";
@@ -29,7 +29,6 @@ export default class ObraListPage extends React.Component {
 
     //Obtem lista de todas as obras
     getList(searchText) {
-        searchText = searchText ? searchText : {};
         services.obra
             .getObras(searchText)
             .then((value) => this.setState({ obras: value }))
@@ -70,7 +69,7 @@ export default class ObraListPage extends React.Component {
             <Container style={{ display: "grid" }}>
                 {error !== undefined && <Alert variant="danger">{error}</Alert>}
 
-                <SearchFormComponent search={(text) => this.getList(text)} />
+
 
                 <SubmitDialogComponent
                     show={toCreate}
@@ -78,21 +77,27 @@ export default class ObraListPage extends React.Component {
                     submited={(createdObra) => this.setState({ obras: [...obras, createdObra], toCreate: false })}
                 />
 
+                <Container>
+                    <Row>
+                        <Col xs={6}>
+                            <SearchFormComponent search={(text) => this.getList(text)} />
+                        </Col>
+                        <Col xs={6}>
+                            <div className="buttons-container" style={{ marginBottom: "5px", position: "fixed", marginTop: "5px", marginLeft: "40%" }}> {/*Se estiver nos favoritos, não permite adicionar obras*/}
+                                {user && user.role === 1 && (
+                                    <Button
+                                        variant="outline-primary"
+                                        style={{ alignSelf: "flex-start" }}
+                                        onClick={() => this.setState({ toCreate: true })}>
 
-
-                <div className="buttons-container" style={{ marginBottom: "5px", position: "fixed", marginTop: "5px", marginLeft: "40%" }}> {/*Se estiver nos favoritos, não permite adicionar obras*/}
-                    {user && user.role === 1 && (
-                        <Button
-                            variant="outline-primary"
-                            style={{ alignSelf: "flex-start" }}
-                            onClick={() => this.setState({ toCreate: true })}>
-
-                            <span role="img" aria-label="Adicionar">🖊️ </span>
+                                        <span role="img" aria-label="Adicionar">🖊️ </span>
                                     &nbsp;Adicionar Obra
-                        </Button>
-                    )}
-                </div>
-
+                                    </Button>
+                                )}
+                            </div>
+                        </Col>
+                    </Row>
+                </Container>
 
                 <Table responsive>
                     <thead>
@@ -108,21 +113,21 @@ export default class ObraListPage extends React.Component {
                         {
                             obras.map((obra, index) => (
                                 <tr key={`obra${index}`} >
-                                    <td style={{ cursor: "pointer" }} 
-                                    onClick={() => this.props.history.push(`/obra/details/${obra._id}`)}>
+                                    <td style={{ cursor: "pointer" }}
+                                        onClick={() => this.props.history.push(`/obra/details/${obra._id}`)}>
                                         <img style={{ height: "100px", width: "75px", border: "1px solid white" }} src={obra.url} />
                                     </td>
                                     <td style={{ cursor: "pointer" }}
-                                     onClick={() => this.props.history.push(`/obra/details/${obra._id}`)}>
-                                         {obra.nome}</td>
+                                        onClick={() => this.props.history.push(`/obra/details/${obra._id}`)}>
+                                        {obra.nome}</td>
 
                                     <td style={{ cursor: "pointer" }}
-                                     onClick={() => this.props.history.push(`/obra/details/${obra._id}`)}>
-                                         {obra.tipo}</td>
+                                        onClick={() => this.props.history.push(`/obra/details/${obra._id}`)}>
+                                        {obra.tipo}</td>
 
                                     <td style={{ cursor: "pointer" }}
-                                     onClick={() => this.props.history.push(`/obra/details/${obra._id}`)}>
-                                         {obra.avaliacao.toFixed(1)}</td>
+                                        onClick={() => this.props.history.push(`/obra/details/${obra._id}`)}>
+                                        {obra.avaliacao.toFixed(1)}</td>
 
                                     <td style={{ textAlign: "right" }}>
                                         {

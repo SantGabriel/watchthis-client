@@ -21,6 +21,7 @@ export default class ObraListPage extends React.Component {
 
     //Obtem minha lista de obras
     getMyList(searchText) {
+        searchText = searchText ? searchText : "";
         services.user
             .getItensListas(searchText)
             .then((value) => this.setState({ itensLista: value, myList: true }))

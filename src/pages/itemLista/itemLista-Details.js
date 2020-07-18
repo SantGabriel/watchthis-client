@@ -2,7 +2,7 @@ import React from 'react';
 import { Container, Button, Col, Row, Jumbotron, Badge, Spinner, Alert } from 'react-bootstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faArrowLeft } from '@fortawesome/free-solid-svg-icons';
-import SubmitDialogComponent from '../../components/itemLista/itemLista-SubmitDialog';
+import SubmitDialogComponentItem from '../../components/itemLista/itemLista-SubmitDialog';
 import service from '../../services';
 
 export default class ItemListaDetailsPage extends React.Component {
@@ -135,7 +135,7 @@ export default class ItemListaDetailsPage extends React.Component {
                             </p>
                         </Jumbotron>
 
-                        <SubmitDialogComponent
+                        <SubmitDialogComponentItem
                             itemLista={itemLista}
                             show={toUpdate}
                             handleClose={() => this.setState({ toUpdate: false })}

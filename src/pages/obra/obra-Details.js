@@ -4,7 +4,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faArrowLeft } from '@fortawesome/free-solid-svg-icons';
 import service from '../../services';
 import RemoveDialogComponent from '../../components/obra/RemoveDialog';
-import SubmitDialogComponent from '../../components/obra/SubmitDialog';
+import SubmitDialogObraComponent from '../../components/obra/SubmitDialog';
 import AuthContext from "../../configs/authContext";
 
 export default class ObraDetailsPage extends React.Component {
@@ -48,14 +48,13 @@ export default class ObraDetailsPage extends React.Component {
                         <Jumbotron>
                             <div className="row col-sm-12">
                                 <div className="col-sm-6">
-                                <h1>{obra.nome}
-                                        </h1>
-                                        </div>
-                                    <div className="col-sm-6" style={{ paddingLeft:"200px"}}>
+                                    <h1>{obra.nome}
+                                    </h1>
+                                </div>
+                                <div className="col-sm-6" style={{ paddingLeft: "200px" }}>
                                     <img style={{ height: "274px", width: "200px", border: "1px solid white", }} className="card-img-top" alt={obra.nome} src={obra.url} />
-                                    </div>
-                                
-                                
+                                </div>
+
                             </div>
 
 
@@ -130,12 +129,12 @@ export default class ObraDetailsPage extends React.Component {
                                             variant="dark"
                                             onClick={() => this.setState({ toUpdate: true })}>
                                             Update
-                                </Button>&nbsp;
-                                <Button
+                                        </Button>&nbsp;
+                                        <Button
                                             variant="danger"
                                             onClick={() => this.setState({ toRemove: true })}>
                                             Remove
-                                </Button>
+                                        </Button>
                                     </p>
                                     :
                                     ""
@@ -150,7 +149,8 @@ export default class ObraDetailsPage extends React.Component {
                             handleClose={() => this.setState({ toRemove: false })}
                             removed={() => this.props.history.goBack()}
                         />
-                        <SubmitDialogComponent
+                        
+                        <SubmitDialogObraComponent
                             obra={obra}
                             show={toUpdate}
                             handleClose={() => this.setState({ toUpdate: false })}

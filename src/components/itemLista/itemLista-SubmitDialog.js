@@ -2,7 +2,7 @@ import React from 'react';
 import { Modal, Button, Form } from 'react-bootstrap';
 import services from '../../services';
 
-export default class SubmitDialogComponent extends React.Component {
+export default class SubmitDialogItemComponent extends React.Component {
   toEdit = false;
 
   constructor(props) {

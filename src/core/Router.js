@@ -21,7 +21,7 @@ export default class RouterComponent extends React.Component {
           <Route exact path="/register" component={RegisterPage} />
           <Route exact path="/login" component={LoginPage} />
           <Route exact path="/obra/list/:search?" component={ObraListPage} />
-          <PrivateRoute roles={[roles.Admin, roles.Utilizador]} exact path="/user/list" component={ItemListaListPage} />
+          <PrivateRoute roles={[roles.Admin, roles.Utilizador]} exact path="/user/list/:search?" component={ItemListaListPage} />
           <Route
             exact
             path="/obra/details/:id"

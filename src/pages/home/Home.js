@@ -13,7 +13,7 @@ export default class App extends React.Component {
   }
 
   componentDidMount() {
-    this.getList();
+    this.getList({});
   }
 
   getList(/*searchText*/) {

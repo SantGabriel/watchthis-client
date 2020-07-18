@@ -9,7 +9,7 @@ import AuthContext from "../../configs/authContext";
 import "./obra.css";
 
 export default class ObraListPage extends React.Component {
-    
+
     static contextType = AuthContext; //contexto do utilizador
 
     constructor(props) {
@@ -19,6 +19,7 @@ export default class ObraListPage extends React.Component {
             itensLista: [],
             error: undefined,
             toCreate: false,
+            role:[]
         };
     }
 
@@ -64,20 +65,24 @@ export default class ObraListPage extends React.Component {
 
     render() {
         const { user } = this.context;
-        const { obras, error, toCreate } = this.state;
+        const { obras, error, toCreate} = this.state;
+
         if (user) this.getMyList(); //obtem a lista de favoritos apenas de utilizadores autenticados
         return (
             <Container>
                 {error !== undefined && <Alert variant="danger">{error}</Alert>}
 
-                <div className="buttons-container"> {/*Se estiver nos favoritos, não permite adicionar obras*/}
-                    <Button
-                        variant="outline-primary"
-                        style={{ alignSelf: "flex-start" }}
-                        onClick={() => this.setState({ toCreate: true })}>
-                        <FontAwesomeIcon icon={faPlus} />
-                        &nbsp;Adicionar nova obra
-                    </Button>
+                <div className="buttons-container" style={{ marginTop: "5px" }}> {/*Se estiver nos favoritos, não permite adicionar obras*/}
+                                {user && user.role === 1 && (
+                                    <Button
+                                    variant="outline-primary"
+                                    style={{ alignSelf: "flex-start" }}
+                                    onClick={() => this.setState({ toCreate: true })}>
+                                    
+                                   <FontAwesomeIcon icon={faPlus} />
+                                    &nbsp;Adicionar nova obra
+                                </Button>
+                                  )}                        
                 </div>
                 <SearchFormComponent search={(text) => this.getList(text)} />
 
@@ -103,7 +108,7 @@ export default class ObraListPage extends React.Component {
                                 <tr key={`obra${index}`} >
                                     <td>{obra.nome}</td>
                                     <td>
-                                    <img style={{ height: "100px", width: "75px", border:"1px solid white" }} src={obra.url} />
+                                        <img style={{ height: "100px", width: "75px", border: "1px solid white" }} src={obra.url} />
                                     </td>
                                     <td>{obra.tipo}</td>
                                     <td>{obra.avaliacao.toFixed(1)}</td>
@@ -115,21 +120,21 @@ export default class ObraListPage extends React.Component {
                                         </Button>
                                         {
                                             user ? //Se não estiver autenticado, não possui a opção de adicionar ao favoritos                                         
-                                            (this.verifyIsInTheList(obra) ?
-                                                ( //se estiver na lista, aparece a opção de remover
-                                                    <Button variant="outline-danger" onClick={() => this.removeFromMyList(obra._id)}>
-                                                        <FontAwesomeIcon icon={faStar} />
-                                                    </Button>
+                                                (this.verifyIsInTheList(obra) ?
+                                                    ( //se estiver na lista, aparece a opção de remover
+                                                        <Button variant="outline-danger" onClick={() => this.removeFromMyList(obra._id)}>
+                                                            <FontAwesomeIcon icon={faStar} />
+                                                        </Button>
+                                                    )
+                                                    :
+                                                    ( //se a obra não estiver na lista, aparece a opção de adicionar 
+                                                        <Button variant="warning" onClick={() => this.addToMyList(obra._id)}>
+                                                            <FontAwesomeIcon icon={faStar} />
+                                                        </Button>
+                                                    )
                                                 )
                                                 :
-                                                ( //se a obra não estiver na lista, aparece a opção de adicionar 
-                                                    <Button variant="warning" onClick={() => this.addToMyList(obra._id)}>
-                                                        <FontAwesomeIcon icon={faStar} />
-                                                    </Button>
-                                                )
-                                            )
-                                            :
-                                            ""
+                                                ""
                                         }
                                     </td>
                                 </tr>

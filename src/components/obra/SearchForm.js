@@ -20,12 +20,12 @@ export default class SearchFormComponent extends React.Component {
     return (
       <Form onSubmit={(evt) => this.handleSubmit(evt)}>
         <Row>
-          <Col style={{ padding: 0 }}>
+          <Col style={{ paddingTop: "5px" }}>
             <Form.Group>
               <Form.Control value={text} onChange={(evt) => this.setState({ text: evt.target.value })} />
             </Form.Group>
           </Col>
-          <Col xs={2} style={{ padding: 0 }}>
+          <Col xs={2} style={{ paddingTop: "5px"}}>
             <Button variant="primary" type="submit">
               <FontAwesomeIcon icon={faSearch} />
             </Button>

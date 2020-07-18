@@ -43,6 +43,9 @@ export default class NavbarComponent extends React.Component {
                   Minha Lista
                 </Nav.Link>
               )}
+              <Nav.Link as={NavLink} to="/about">
+                Acerca
+                  </Nav.Link>
             </Nav>
             <Nav>
               {user ? (

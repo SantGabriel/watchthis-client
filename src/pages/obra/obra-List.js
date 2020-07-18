@@ -48,14 +48,14 @@ export default class ObraListPage extends React.Component {
     addToMyList(obraId) {   //Adiciona uma obra à lista de obras do User
         services.user
             .addItemLista(obraId)
-            .then(() => alert("successfuly added"))
+            .then(() => this.getList())
             .catch((err) => this.setState({ error: err }));
     }
 
     removeFromMyList(obraId) {
         services.user
             .removeItemLista(obraId)
-            .then(() => this.setState((state) => ({ obras: state.obras.filter((b) => b._id !== obraId) })))
+            .then(() => this.getList())
             .catch((err) => this.setState({ error: err }));
     }
 
@@ -88,6 +88,7 @@ export default class ObraListPage extends React.Component {
                     <thead>
                         <tr>
                             <th>Nome</th>
+                            <th>Imagem</th>
                             <th>Tipo</th>
                             <th>Avaliacao</th>
                             <th />
@@ -98,6 +99,9 @@ export default class ObraListPage extends React.Component {
                             obras.map((obra, index) => (
                                 <tr key={`obra${index}`} >
                                     <td>{obra.nome}</td>
+                                    <td>
+                                    <img style={{ height: "100px", width: "75px", border:"1px solid white" }} src={obra.url} />
+                                    </td>
                                     <td>{obra.tipo}</td>
                                     <td>{obra.avaliacao.toFixed(1)}</td>
                                     <td style={{ textAlign: "right" }}>

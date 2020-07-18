@@ -46,7 +46,20 @@ export default class ObraDetailsPage extends React.Component {
                 {obra !== undefined
                     ? <div>
                         <Jumbotron>
-                            <h1>{obra.nome}</h1>
+                            <div className="row col-sm-12">
+                                <div className="col-sm-6">
+                                <h1>{obra.nome}
+                                        </h1>
+                                        </div>
+                                    <div className="col-sm-6" style={{ paddingLeft:"200px"}}>
+                                    <img style={{ height: "274px", width: "200px", border: "1px solid white", }} className="card-img-top" alt={obra.nome} src={obra.url} />
+                                    </div>
+                                
+                                
+                            </div>
+
+
+
                             <Row>
                                 <Col xs={4} md={3} lg={2}>
                                     <Badge variant="secondary">Tipo de obra</Badge>

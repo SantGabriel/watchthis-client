@@ -16,9 +16,10 @@ export default class App extends React.Component {
     this.getList();
   }
 
-  getList(/*searchText*/) {
+  getList(searchText) {
+    searchText = searchText ? searchText : {};
     services.obra
-      .getObras(/*searchText*/)
+      .getObras(searchText)
       .then((value) => this.setState({ obras: value }))
       .catch((err) => this.setState({ error: err }));
   }

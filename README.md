@@ -1,34 +1,55 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## IMPORTANTE - LEIA
 
-## Available Scripts
+O cliente e o servidor estão hospedados no links abaixo: 
 
-In the project directory, you can run:
 
-### `npm start`
+&nbsp;
 
-Runs the app in the development mode.<br />
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 
-The page will reload if you make edits.<br />
-You will also see any lint errors in the console.
+&nbsp;
+https://watchthis-client.herokuapp.com 
 
-### `npm test`
 
-Launches the test runner in the interactive watch mode.<br />
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+&nbsp;
+https://watchthis-server.herokuapp.com 
 
-### `npm run build`
 
-Builds the app for production to the `build` folder.<br />
-It correctly bundles React in production mode and optimizes the build for the best performance.
+&nbsp;
 
-The build is minified and the filenames include the hashes.<br />
-Your app is ready to be deployed!
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
 
-## Learn More
+&nbsp;
+O Heroku coloca as aplicações que ficam 30 minutos sem acesso para "dormir", por isso ele demora um pouco para abrir pela primeira vez. 
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+&nbsp;
+É necessário entra no link do servidor para liga-lo. Quando surgir na tela "Cannot GET /" é porque o servidor já está ativo. 
+
+
+&nbsp;
+Agora é só acessar o cliente e pronto :) &nbsp;
+
+
+&nbsp;
+## Observações
+
+
+&nbsp;
+O ultimo commits feitos depois do hórario foram:
+
+
+&nbsp;
+Comentar uma função que não existia mais no projeto; 
+
+
+
+&nbsp;
+Trocar o link do servidor de localhost para o link do heroku; 
+
+
+&nbsp;
+
+
+
+&nbsp;
+Espero que releve isso :)

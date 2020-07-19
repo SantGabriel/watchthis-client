@@ -65,7 +65,7 @@ export default class SubmitDialogObraComponent extends React.Component {
 
   render() {
     const { show } = this.props;
-    this.listCategorias();
+    //this.listCategorias();
     return (
       <Modal show={show}>
         <Modal.Header>

@@ -1,4 +1,4 @@
-const serverURL = "http://localhost:5000";
+const serverURL = "https://watchthis-server.herokuapp.com";
 
 export const apiRequest = (method, route, body, query) => {
   let currentUser = sessionStorage.getItem("user");

@@ -82,7 +82,10 @@ export default class SubmitDialogObraComponent extends React.Component {
 
             <Form.Group controlId="exampleForm.ControlSelect1">
               <Form.Label>Tipo</Form.Label>
-              <Form.Control as="select" value={this.state.tipo}>
+              <Form.Control as="select"
+                value={this.state.tipo}
+                OnChange={evt => this.setState({ tipo: evt.target.value })}
+              >
                 <option value="anime">anime</option>
                 <option value="filme">filme</option>
                 <option value="serie">serie</option>

@@ -67,9 +67,6 @@ export default class ObraListPage extends React.Component {
         if (user) this.getMyList(); //obtem a lista de favoritos apenas de utilizadores autenticados
         return (
             <Container style={{ display: "grid" }}>
-              
-
-
 
                 <SubmitDialogComponent
                     show={toCreate}

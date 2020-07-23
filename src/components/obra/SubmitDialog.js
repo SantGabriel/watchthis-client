@@ -1,6 +1,5 @@
 import React from 'react';
 import { Modal, Button, Form } from 'react-bootstrap';
-import Select from 'react-select';
 import service from '../../services';
 
 export default class SubmitDialogObraComponent extends React.Component {
